@@ -15,8 +15,13 @@ const std::string_view testInputPart1String =   "3   4\n" \
                                                 "3   3";
 const std::string_view testOutputPart1String = "11";
 
-const std::string_view testInputPart2String = "Add your input string here";
-const std::string_view testOutputPart2String = "Add your output string here";
+const std::string_view testInputPart2String =   "3   4\n" \
+                                                "4   3\n" \
+                                                "2   5\n" \
+                                                "1   3\n" \
+                                                "3   9\n" \
+                                                "3   3";
+const std::string_view testOutputPart2String = "31";
 
 class Day1Tests : public ::testing::Test
 {
@@ -57,10 +62,11 @@ TEST_F(Day1Tests, TestPart1Verify)
 
 TEST_F(Day1Tests, TestPart2Verify)
 {
-    // uint32_t resInt = std::stoi(testOutputPart1String.data());
-    // std::string result = handlePart2(inputFile.getText());
-    // uint32_t resultInt = std::stoi(result);
-    // ASSERT_EQ(resultInt, resInt);
+    uint32_t resInt = std::stoi(testOutputPart2String.data());
+    std::string result = handlePart2(testInputPart2String);
+    uint32_t resultInt = std::stoi(result);
+    std::cout << "Part 2 Result: " << resultInt << std::endl;
+    ASSERT_EQ(resultInt, resInt);
 }
 
 TEST_F(Day1Tests, TestPart1Actual)
@@ -73,9 +79,9 @@ TEST_F(Day1Tests, TestPart1Actual)
 
 TEST_F(Day1Tests, TestPart2Actual)
 {
-    // uint32_t resInt = std::stoi(testOutputPart1String.data());
-    // std::string result = handlePart2(testInputPart1String);
-    // uint32_t resultInt = std::stoi(result);
-    // std::cout << "Part 1 Result: " << resultInt << std::endl;
+    uint32_t resInt = std::stoi(testOutputPart2String.data());
+    std::string result = handlePart2(inputFile.getText());
+    uint32_t resultInt = std::stoi(result);
+    std::cout << "Part 2 Result: " << resultInt << std::endl;
 }
 
