@@ -41,18 +41,33 @@ protected:
 
 
 
-TEST_F(Day{{day}}Tests, TestPart1)
+TEST_F(Day1Tests, TestPart1Verify)
+{
+    uint32_t resInt = std::stoi(testOutputPart1String.data());
+    std::string result = handlePart1(testInputPart1String);
+    uint32_t resultInt = std::stoi(result);
+    std::cout << "Part 1 Result: " << resultInt << std::endl;
+    ASSERT_EQ(resultInt, resInt);
+}
+TEST_F(Day1Tests, TestPart2Verify)
+{
+    uint32_t resInt = std::stoi(testOutputPart2String.data());
+    std::string result = handlePart2(testInputPart2String);
+    uint32_t resultInt = std::stoi(result);
+    std::cout << "Part 2 Result: " << resultInt << std::endl;
+    ASSERT_EQ(resultInt, resInt);
+}
+TEST_F(Day1Tests, TestPart1Actual)
 {
     uint32_t resInt = std::stoi(testOutputPart1String.data());
     std::string result = handlePart1(inputFile.getText());
     uint32_t resultInt = std::stoi(result);
-    ASSERT_EQ(resultInt, resInt);
+    std::cout << "Part 1 Result: " << resultInt << std::endl;
 }
-
-TEST_F(Day{{day}}Tests, TestPart2)
+TEST_F(Day1Tests, TestPart2Actual)
 {
-    uint32_t resInt = std::stoi(testOutputPart1String.data());
+    uint32_t resInt = std::stoi(testOutputPart2String.data());
     std::string result = handlePart2(inputFile.getText());
     uint32_t resultInt = std::stoi(result);
-    ASSERT_EQ(resultInt, resInt);
+    std::cout << "Part 2 Result: " << resultInt << std::endl;
 }
