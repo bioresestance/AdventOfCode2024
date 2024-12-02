@@ -1,0 +1,10 @@
+add_executable(day-{{day}} main.cpp)
+target_link_libraries(day-{{day}} GTest::gtest_main Common)
+
+file(GLOB SOURCES "src/*.cpp")
+target_sources(day-{{day}} PRIVATE ${SOURCES})
+target_include_directories(day-{{day}} PRIVATE "src")
+
+
+include(GoogleTest)
+gtest_discover_tests(day-{{day}})

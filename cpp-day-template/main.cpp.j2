@@ -1,0 +1,58 @@
+#include <string>
+#include <iostream>
+#include <string_view>
+#include <gtest/gtest.h>
+#include <filesystem>
+#include "InputFile.hpp"
+#include "src/include.hpp"
+
+// Add the test input and output strings here to validate the solution
+const std::string_view testInputPart1String = "Add your input string here";
+const std::string_view testOutputPart1String = "Add your output string here";
+
+const std::string_view testInputPart2String = "Add your input string here";
+const std::string_view testOutputPart2String = "Add your output string here";
+
+class Day{{day}}Tests : public ::testing::Test
+{
+protected:
+
+    InputFile inputFile;
+
+    Day{{day}}Tests() : inputFile(getInputFilePath())
+    {
+
+    }
+   
+   static std::string getInputFilePath()
+    {
+        using std::filesystem::path;
+
+        // Get the directory of the current file
+        path currentFilePath = __FILE__;
+        path currentDir = currentFilePath.parent_path();
+
+        // Append the input file name to the directory path
+        path inputFilePath = currentDir / "input.txt";
+
+        return inputFilePath.string();
+    }
+};
+
+
+
+TEST_F(Day{{day}}Tests, TestPart1)
+{
+    uint32_t resInt = std::stoi(testOutputPart1String.data());
+    std::string result = handlePart1(inputFile.getText());
+    uint32_t resultInt = std::stoi(result);
+    ASSERT_EQ(resultInt, resInt);
+}
+
+TEST_F(Day{{day}}Tests, TestPart2)
+{
+    uint32_t resInt = std::stoi(testOutputPart1String.data());
+    std::string result = handlePart2(inputFile.getText());
+    uint32_t resultInt = std::stoi(result);
+    ASSERT_EQ(resultInt, resInt);
+}
