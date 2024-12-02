@@ -1,5 +1,4 @@
 {
-    "cmake.sourceDirectory": "/workspaces/AoC-Cpp-Template",
     "cmake.ignoreCMakeListsMissing": true,
     "files.associations": {
         "iostream": "cpp",
@@ -67,6 +66,10 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "bitset": "cpp",
+        "regex": "cpp"
     }
 }

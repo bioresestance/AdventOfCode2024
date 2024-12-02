@@ -31,7 +31,7 @@ std::string InputFile::getText()
     std::string text;
     for (const auto &line : _lines)
     {
-        text += line;
+        text += line + "\n";
     }
 
     return text;
