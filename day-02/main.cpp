@@ -7,19 +7,24 @@
 #include "src/include.hpp"
 
 // Add the test input and output strings here to validate the solution
-const std::string_view testInputPart1String = "Add your input string here";
-const std::string_view testOutputPart1String = "Add your output string here";
+const std::string_view testInputPart1String =   "7 6 4 2 1\n"\
+                                                "1 2 7 8 9\n"\
+                                                "9 7 6 2 1\n"\
+                                                "1 3 2 4 5\n"\
+                                                "8 6 4 4 1\n"\
+                                                "1 3 6 7 9";
+const std::string_view testOutputPart1String = "2";
 
 const std::string_view testInputPart2String = "Add your input string here";
 const std::string_view testOutputPart2String = "Add your output string here";
 
-class Day{{day}}Tests : public ::testing::Test
+class Day2Tests : public ::testing::Test
 {
 protected:
 
     InputFile inputFile;
 
-    Day{{day}}Tests() : inputFile(getInputFilePath())
+    Day2Tests() : inputFile(getInputFilePath())
     {
 
     }
@@ -41,7 +46,7 @@ protected:
 
 
 
-TEST_F(Day{{day}}Tests, TestPart1Verify)
+TEST_F(Day2Tests, TestPart1Verify)
 {
     uint32_t resInt = std::stoi(testOutputPart1String.data());
     std::string result = handlePart1(testInputPart1String);
@@ -49,25 +54,26 @@ TEST_F(Day{{day}}Tests, TestPart1Verify)
     std::cout << "Part 1 Result: " << resultInt << std::endl;
     ASSERT_EQ(resultInt, resInt);
 }
-TEST_F(Day{{day}}Tests, TestPart2Verify)
+TEST_F(Day2Tests, TestPart2Verify)
 {
-    uint32_t resInt = std::stoi(testOutputPart2String.data());
-    std::string result = handlePart2(testInputPart2String);
-    uint32_t resultInt = std::stoi(result);
-    std::cout << "Part 2 Result: " << resultInt << std::endl;
-    ASSERT_EQ(resultInt, resInt);
+    // uint32_t resInt = std::stoi(testOutputPart2String.data());
+    // std::string result = handlePart2(testInputPart2String);
+    // uint32_t resultInt = std::stoi(result);
+    // std::cout << "Part 2 Result: " << resultInt << std::endl;
+    // ASSERT_EQ(resultInt, resInt);
 }
-TEST_F(Day{{day}}Tests, TestPart1Actual)
+TEST_F(Day2Tests, TestPart1Actual)
 {
-    uint32_t resInt = std::stoi(testOutputPart1String.data());
+    static constexpr uint32_t actual_result = 591;
     std::string result = handlePart1(inputFile.getText());
     uint32_t resultInt = std::stoi(result);
     std::cout << "Part 1 Result: " << resultInt << std::endl;
+    ASSERT_EQ(resultInt, actual_result);
 }
-TEST_F(Day{{day}}Tests, TestPart2Actual)
+TEST_F(Day2Tests, TestPart2Actual)
 {
-    uint32_t resInt = std::stoi(testOutputPart2String.data());
-    std::string result = handlePart2(inputFile.getText());
-    uint32_t resultInt = std::stoi(result);
-    std::cout << "Part 2 Result: " << resultInt << std::endl;
+    // uint32_t resInt = std::stoi(testOutputPart2String.data());
+    // std::string result = handlePart2(inputFile.getText());
+    // uint32_t resultInt = std::stoi(result);
+    // std::cout << "Part 2 Result: " << resultInt << std::endl;
 }
