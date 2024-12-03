@@ -72,8 +72,10 @@ TEST_F(Day2Tests, TestPart1Actual)
 }
 TEST_F(Day2Tests, TestPart2Actual)
 {
+    static constexpr uint32_t actual_result = 621;
     uint32_t resInt = std::stoi(testOutputPart2String.data());
     std::string result = handlePart2(inputFile.getText());
     uint32_t resultInt = std::stoi(result);
     std::cout << "Part 2 Result: " << resultInt << std::endl;
+    ASSERT_EQ(resultInt, actual_result);
 }
