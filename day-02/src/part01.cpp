@@ -5,6 +5,7 @@
 #include "Utils.hpp"
 #include <vector>
 #include <utility>
+#include <tabulate/table.hpp>
 
 enum class Direction
 {

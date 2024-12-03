@@ -16,5 +16,7 @@ RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
 RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_UNMANAGED_INSTALL="/usr/local/bin" sh
 # Install just
 RUN curl -fsSL https://just.systems/install.sh | bash -s -- --to /usr/local/bin
+# Install Conan
+RUN uv tool install conan
 
 
