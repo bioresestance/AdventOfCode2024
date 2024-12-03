@@ -7,67 +7,62 @@
 #include "src/include.hpp"
 
 // Add the test input and output strings here to validate the solution
-const std::string_view testInputPart1String = "Add your input string here";
-const std::string_view testOutputPart1String = "Add your output string here";
+const std::string_view testInputString = "";
 
-const std::string_view testInputPart2String = "Add your input string here";
-const std::string_view testOutputPart2String = "Add your output string here";
+const uint64_t part1Expected = 0;
+const uint64_t part2Expected = 0;
 
-class Day{{day}}Tests : public ::testing::Test
+    
+static std::string getInputFilePath()
 {
-protected:
+    using std::filesystem::path;
 
-    InputFile inputFile;
+    // Get the directory of the current file
+    path currentFilePath = __FILE__;
+    path currentDir = currentFilePath.parent_path();
 
-    Day{{day}}Tests() : inputFile(getInputFilePath())
+    // Append the input file name to the directory path
+    path inputFilePath = currentDir / "input.txt";
+
+    return inputFilePath.string();
+}
+
+
+TEST(Day{{day}}Tests, TestPart1)
+{
+    auto result = handlePart1(testInputString);
+    std::cout << "Part 1 - Test Result: " << result << std::endl;
+    ASSERT_EQ(result, part1Expected);
+}
+
+TEST(Day{{day}}Tests, TestPart2)
+{
+    auto result = handlePart1(testInputString);
+    std::cout << "Part 1 - Test Result: " << result << std::endl;
+    ASSERT_EQ(result, part1Expected);
+}
+
+
+
+
+int main(int argc, char **argv) {
+
+    // Run the tests
+    ::testing::InitGoogleTest(&argc, argv);
+    int result = RUN_ALL_TESTS();
+
+    // If the tests pass, run the solution
+    if (result == 0) 
     {
+        std::cout << "--------------------------------------------------------------------------------------------------------" << std::endl;
+        std::cout << "Day {{day}}, running solution:" << std::endl;
+        InputFile inputFile = InputFile(getInputFilePath());
+        auto part1Result = handlePart1(inputFile.readAll());
+        std::cout << "Part 1 - Result: " << part1Result << std::endl;
 
-    }
-   
-   static std::string getInputFilePath()
-    {
-        using std::filesystem::path;
-
-        // Get the directory of the current file
-        path currentFilePath = __FILE__;
-        path currentDir = currentFilePath.parent_path();
-
-        // Append the input file name to the directory path
-        path inputFilePath = currentDir / "input.txt";
-
-        return inputFilePath.string();
-    }
-};
-
-
-
-TEST_F(Day{{day}}Tests, TestPart1Verify)
-{
-    uint32_t resInt = std::stoi(testOutputPart1String.data());
-    std::string result = handlePart1(testInputPart1String);
-    uint32_t resultInt = std::stoi(result);
-    std::cout << "Part 1 Result: " << resultInt << std::endl;
-    ASSERT_EQ(resultInt, resInt);
-}
-TEST_F(Day{{day}}Tests, TestPart2Verify)
-{
-    uint32_t resInt = std::stoi(testOutputPart2String.data());
-    std::string result = handlePart2(testInputPart2String);
-    uint32_t resultInt = std::stoi(result);
-    std::cout << "Part 2 Result: " << resultInt << std::endl;
-    ASSERT_EQ(resultInt, resInt);
-}
-TEST_F(Day{{day}}Tests, TestPart1Actual)
-{
-    uint32_t resInt = std::stoi(testOutputPart1String.data());
-    std::string result = handlePart1(inputFile.getText());
-    uint32_t resultInt = std::stoi(result);
-    std::cout << "Part 1 Result: " << resultInt << std::endl;
-}
-TEST_F(Day{{day}}Tests, TestPart2Actual)
-{
-    uint32_t resInt = std::stoi(testOutputPart2String.data());
-    std::string result = handlePart2(inputFile.getText());
-    uint32_t resultInt = std::stoi(result);
-    std::cout << "Part 2 Result: " << resultInt << std::endl;
+        auto part2Result = handlePart2(inputFile.readAll());
+        std::cout << "Part 2 - Result: " << part2Result << std::endl;
+        std::cout << "--------------------------------------------------------------------------------------------------------" << std::endl;
+    } 
+    return result;
 }

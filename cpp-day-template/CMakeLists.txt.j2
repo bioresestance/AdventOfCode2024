@@ -1,6 +1,6 @@
 enable_testing()
 add_executable(day-{{day}} main.cpp)
-target_link_libraries(day-{{day}} GTest::gtest_main Common)
+target_link_libraries(day-{{day}} GTest::gtest Common)
 
 file(GLOB SOURCES "src/*.cpp")
 target_sources(day-{{day}} PRIVATE ${SOURCES})
