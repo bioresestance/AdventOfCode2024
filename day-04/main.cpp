@@ -7,7 +7,7 @@
 #include "src/include.hpp"
 
 #define ENABLE_PART1 (true)
-#define ENABLE_PART2 (false)
+#define ENABLE_PART2 (true)
 
 // Add the test input and output strings here to validate the solution
 const std::vector<std::string> testInputStrings = {"MMMSXXMASM",
@@ -22,7 +22,7 @@ const std::vector<std::string> testInputStrings = {"MMMSXXMASM",
                                                    "MXMXAXMASX"};
 
 const uint64_t part1Expected = 18;
-const uint64_t part2Expected = -1;
+const uint64_t part2Expected = 9;
 
 static std::string getInputFilePath()
 {
@@ -52,7 +52,7 @@ TEST(Day4Tests, TestPart2)
 {
     auto result = handlePart2(testInputStrings);
     std::cout << "Part 2 - Test Result: " << result << std::endl;
-    ASSERT_EQ(result, part1Expected);
+    ASSERT_EQ(result, part2Expected);
 }
 #endif
 
