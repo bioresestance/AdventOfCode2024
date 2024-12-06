@@ -3,6 +3,7 @@
 #include <string_view>
 #include <gtest/gtest.h>
 #include <filesystem>
+#include <chrono>
 #include "InputFile.hpp"
 #include "src/include.hpp"
 
@@ -66,17 +67,25 @@ int main(int argc, char **argv)
     // If the tests pass, run the solution
     if (result == 0)
     {
+        InputFile inputFile = InputFile(getInputFilePath());
         std::cout << "--------------------------------------------------------------------------------------------------------" << std::endl;
 #if ENABLE_PART1
         std::cout << "Day 6, running solution:" << std::endl;
-        InputFile inputFile = InputFile(getInputFilePath());
+        auto startPart1 = std::chrono::high_resolution_clock::now();
         auto part1Result = handlePart1(inputFile.getLines());
+        auto endPart1 = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> durationPart1 = endPart1 - startPart1;
         std::cout << "Part 1 - Real Result: " << part1Result << std::endl;
+        std::cout << "Part 1 - Time taken: " << durationPart1.count() << " seconds" << std::endl;
 #endif
 
 #if ENABLE_PART2
+        auto startPart2 = std::chrono::high_resolution_clock::now();
         auto part2Result = handlePart2(inputFile.getLines());
+        auto endPart2 = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> durationPart2 = endPart2 - startPart2;
         std::cout << "Part 2 - Real Result: " << part2Result << std::endl;
+        std::cout << "Part 2 - Time taken: " << durationPart2.count() << " seconds" << std::endl;
 #endif
         std::cout << "--------------------------------------------------------------------------------------------------------" << std::endl;
     }

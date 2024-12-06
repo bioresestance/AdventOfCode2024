@@ -177,10 +177,17 @@ int64_t handlePart2(const std::vector<std::string> &inputLines)
         for (auto [colIdx, col] : enumerate(row))
         {
             // No need to replace it, since its already an obstacle.
-            if(col == '#')
+            if (col == '#')
             {
                 continue;
             }
+
+            if (guard_pos.x == colIdx and guard_pos.y == rowIdx)
+            {
+                // Can't place an obstacle in the gaurds starting position.
+                continue;
+            }
+
             // Change it to be an obstacle.
             col = '#';
             if (!Part02::runSimulation(map, guard_pos))
