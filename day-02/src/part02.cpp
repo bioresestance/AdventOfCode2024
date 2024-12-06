@@ -3,6 +3,7 @@
  */
 #include "include.hpp"
 #include "Utils.hpp"
+#include <cstdint>
 
 namespace Part2
 {

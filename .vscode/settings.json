@@ -69,6 +69,8 @@
         "ranges": "cpp",
         "span": "cpp",
         "bitset": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "charconv": "cpp",
+        "format": "cpp"
     }
 }

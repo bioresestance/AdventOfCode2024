@@ -7,11 +7,13 @@
 #include <string>
 #include <ranges>
 #include <algorithm>
+#include <cstdint>
 
-std::string handlePart2(const std::string_view input) {
-        // split the input by lines
+std::string handlePart2(const std::string_view input)
+{
+    // split the input by lines
     std::vector<std::string> lines;
-    for(const auto line: input | std::views::split('\n') )
+    for (const auto line : input | std::views::split('\n'))
     {
         lines.emplace_back(line.begin(), line.end());
     }
@@ -19,23 +21,26 @@ std::string handlePart2(const std::string_view input) {
     std::vector<uint32_t> leftList;
     std::vector<uint32_t> rightList;
 
-    for(const auto& line: lines)
+    for (const auto &line : lines)
     {
-         auto numbers = line | std::views::split(' ') 
-                            | std::views::filter([](auto part) { return !part.empty(); })
-                            | std::views::transform([](auto part) { return std::stoi(std::string(part.begin(), part.end())); });
+        auto numbers = line | std::views::split(' ') | std::views::filter([](auto part)
+                                                                          { return !part.empty(); }) |
+                       std::views::transform([](auto part)
+                                             { return std::stoi(std::string(part.begin(), part.end())); });
         auto it = numbers.begin();
-        if (it != numbers.end()) {
+        if (it != numbers.end())
+        {
             leftList.push_back(*it);
             ++it;
         }
-        if (it != numbers.end()) {
+        if (it != numbers.end())
+        {
             rightList.push_back(*it);
         }
     }
 
     uint32_t sum = 0;
-    for(const auto leftNum: leftList)
+    for (const auto leftNum : leftList)
     {
         uint32_t count = std::ranges::count(rightList, leftNum);
         sum += count * leftNum;

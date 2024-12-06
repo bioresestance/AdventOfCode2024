@@ -5,7 +5,7 @@
 #include "Utils.hpp"
 #include <vector>
 #include <utility>
-
+#include <cstdint>
 enum class Direction
 {
     NONE,
@@ -19,12 +19,14 @@ std::pair<int32_t, Direction> CheckSafety(uint32_t num1, uint32_t num2)
     int change = num1 - num2;
     Direction dir = Direction::NONE;
 
-    if(change == 0) dir = Direction::SAME;
-    if(change > 0)  dir = Direction::INC;
-    if(change < 0)  dir = Direction::DEC;
+    if (change == 0)
+        dir = Direction::SAME;
+    if (change > 0)
+        dir = Direction::INC;
+    if (change < 0)
+        dir = Direction::DEC;
     return {change, dir};
 }
-
 
 std::string handlePart1(const std::string_view input)
 {
@@ -34,11 +36,10 @@ std::string handlePart1(const std::string_view input)
     constexpr uint32_t max_change = 3;
     for (const auto &line : lines)
     {
-        if(line.empty())
+        if (line.empty())
         {
             continue;
         }
-
 
         // Split each line into a list of numbers.
         auto numbers = splitString(line, ' ');
@@ -55,30 +56,28 @@ std::string handlePart1(const std::string_view input)
         {
             auto [change, direction] = CheckSafety(intNumbers[i], intNumbers[i - 1]);
 
-            if( direction == Direction::SAME or direction == Direction::NONE)
+            if (direction == Direction::SAME or direction == Direction::NONE)
             {
                 isSafe = false;
                 break;
             }
 
-            if( i == 1) 
+            if (i == 1)
             {
                 dir = direction;
             }
 
-            if( std::abs(change) > max_change )
+            if (std::abs(change) > max_change)
             {
                 isSafe = false;
                 break;
             }
 
-
-            if( dir != direction)
+            if (dir != direction)
             {
                 isSafe = false;
                 break;
             }
-
         }
 
         if (isSafe)

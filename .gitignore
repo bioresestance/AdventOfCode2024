@@ -36,3 +36,4 @@ build/
 .env
 
 **/input.txt
+checks.json
