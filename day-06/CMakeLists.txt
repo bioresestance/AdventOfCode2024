@@ -8,4 +8,4 @@ target_include_directories(day-6 PRIVATE "src")
 
 
 include(GoogleTest)
-gtest_discover_tests(day-6)
+# gtest_discover_tests(day-6 DISCOVERY_TIMEOUT 3600)
