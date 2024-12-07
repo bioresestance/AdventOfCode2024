@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <unordered_set>
 #include <iostream>
+#include <future>
+#include <thread>
 
 namespace Part02
 {
@@ -172,32 +174,55 @@ int64_t handlePart2(const std::vector<std::string> &inputLines)
         }
     }
 
-    for (auto [rowIdx, row] : enumerate(map))
+    auto worker = [&](int startRow, int endRow) -> uint64_t
     {
-        for (auto [colIdx, col] : enumerate(row))
+        uint64_t local_loop_count = 0;
+        auto map_copy = map;
+        for (int rowIdx = startRow; rowIdx < endRow; ++rowIdx)
         {
-            // No need to replace it, since its already an obstacle.
-            if (col == '#')
+            for (int colIdx = 0; colIdx < map_copy[rowIdx].size(); ++colIdx)
             {
-                continue;
-            }
+                char &col = map_copy[rowIdx][colIdx];
+                // No need to replace it, since its already an obstacle.
+                if (col == '#')
+                {
+                    continue;
+                }
 
-            if (guard_pos.x == colIdx and guard_pos.y == rowIdx)
-            {
-                // Can't place an obstacle in the gaurds starting position.
-                continue;
-            }
+                if (guard_pos.x == colIdx and guard_pos.y == rowIdx)
+                {
+                    // Can't place an obstacle in the gaurds starting position.
+                    continue;
+                }
 
-            // Change it to be an obstacle.
-            col = '#';
-            if (!Part02::runSimulation(map, guard_pos))
-            {
-                loop_count++;
-                std::cout << "Discovered loop at [" << colIdx << "," << rowIdx << "]" << std::endl;
+                // Change it to be an obstacle.
+                col = '#';
+                if (!Part02::runSimulation(map_copy, guard_pos))
+                {
+                    local_loop_count++;
+                    std::cout << "Discovered loop at [" << colIdx << "," << rowIdx << "]" << std::endl;
+                }
+                // Change it back.
+                col = '.';
             }
-            // Change it back.
-            col = '.';
         }
+        return local_loop_count;
+    };
+
+    int numThreads = map.size();
+    int rowsPerThread = 1;
+    std::vector<std::future<uint64_t>> futures;
+
+    for (int i = 0; i < numThreads; ++i)
+    {
+        int startRow = i * rowsPerThread;
+        int endRow = (i == numThreads - 1) ? map.size() : startRow + rowsPerThread;
+        futures.push_back(std::async(std::launch::async, worker, startRow, endRow));
+    }
+
+    for (auto &f : futures)
+    {
+        loop_count += f.get();
     }
 
     return loop_count;
