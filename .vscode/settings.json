@@ -71,6 +71,7 @@
         "bitset": "cpp",
         "regex": "cpp",
         "charconv": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "future": "cpp"
     }
 }
