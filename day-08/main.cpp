@@ -8,7 +8,7 @@
 #include "src/include.hpp"
 
 #define ENABLE_PART1 (true)
-#define ENABLE_PART2 (false)
+#define ENABLE_PART2 (true)
 
 // Add the test input and output strings here to validate the solution
 const std::vector<std::string> testInputStrings = {"............",
@@ -25,7 +25,7 @@ const std::vector<std::string> testInputStrings = {"............",
                                                    "............"};
 
 const uint64_t part1Expected = 14;
-const uint64_t part2Expected = -1;
+const uint64_t part2Expected = 34;
 
 static std::string getInputFilePath()
 {
