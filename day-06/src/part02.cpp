@@ -200,7 +200,7 @@ int64_t handlePart2(const std::vector<std::string> &inputLines)
                 if (!Part02::runSimulation(map_copy, guard_pos))
                 {
                     local_loop_count++;
-                    std::cout << "Discovered loop at [" << colIdx << "," << rowIdx << "]" << std::endl;
+                    // std::cout << "Discovered loop at [" << colIdx << "," << rowIdx << "]" << std::endl;
                 }
                 // Change it back.
                 col = '.';
