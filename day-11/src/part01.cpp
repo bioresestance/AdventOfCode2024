@@ -4,6 +4,7 @@
 #include "include.hpp"
 #include <vector>
 #include <ranges>
+#include <unordered_map>
 
 namespace Part1
 {
@@ -21,45 +22,58 @@ namespace Part1
         return str.size();
     }
 
-    void blink(std::vector<uint64_t> &stones)
+    void blink(std::unordered_map<uint64_t, uint64_t> &stones)
     {
-        uint64_t idx = 0;
+        static std::unordered_map<uint64_t, std::pair<int64_t, int64_t>> cache;
+        std::unordered_map<uint64_t, uint64_t> new_stones;
 
-        while (idx < stones.size())
+        for (const auto &[number, count] : stones)
         {
-            if (stones[idx] == 0)
+            if (cache.find(number) != cache.end())
             {
-                stones[idx] = 1;
-            }
-
-            else if (getNumDigits(stones[idx]) % 2 == 0)
-            {
-                auto [first_half, second_half] = splitNumber(stones[idx]);
-                stones[idx] = first_half;
-                stones.insert(stones.begin() + idx + 1, second_half);
-                idx++; // Skip the newly inserted element
+                auto [first_half, second_half] = cache[number];
+                new_stones[first_half] += count;
+                new_stones[second_half] += count;
             }
             else
             {
-                stones[idx] *= 2024;
+                if (number == 0)
+                {
+                    new_stones[1] += count;
+                }
+                else if (getNumDigits(number) % 2 == 0)
+                {
+                    auto [first_half, second_half] = splitNumber(number);
+                    new_stones[first_half] += count;
+                    new_stones[second_half] += count;
+                    cache[number] = {first_half, second_half};
+                }
+                else
+                {
+                    new_stones[number * 2024] += count;
+                }
             }
-            idx++;
         }
+
+        stones = std::move(new_stones);
     }
+
 } // namespace Part1
 
 int64_t handlePart1(const std::vector<std::string> &inputLines)
 {
     using namespace std::ranges::views;
 
-    std::vector<uint64_t> stones;
+    // std::vector<uint64_t> stones;
+    std::unordered_map<uint64_t, uint64_t> stones;
+
     const uint64_t NUM_ITERS = 25;
 
     // Parse the initial string.
     for (const auto number : inputLines[0] | split(' ') | transform([](auto &&num) -> uint64_t
                                                                     { return std::atoll(num.data()); }))
     {
-        stones.emplace_back(number);
+        stones[number]++;
     }
 
     for (uint64_t i = 0; i < NUM_ITERS; i++)
@@ -67,5 +81,11 @@ int64_t handlePart1(const std::vector<std::string> &inputLines)
         Part1::blink(stones);
     }
 
-    return stones.size();
+    uint64_t total = 0;
+    for (const auto &[num, count] : stones)
+    {
+        total += count;
+    }
+
+    return total;
 }
