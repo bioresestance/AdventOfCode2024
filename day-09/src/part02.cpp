@@ -9,7 +9,7 @@
 #include <numeric>
 #include <limits>
 
-enum class Type
+enum class Type : uint8_t
 {
     FILE,
     SPACE
@@ -18,16 +18,16 @@ enum class Type
 struct Memory
 {
     Type type;
-    uint64_t size;
+    uint8_t size;
     int64_t id = -1;
 };
 
-int64_t
-handlePart2(const std::vector<std::string> &inputLines)
+int64_t handlePart2(const std::vector<std::string> &inputLines)
 {
     using namespace std::ranges::views;
     std::vector<Memory> filesystem;
-    std::vector<uint64_t> done_ids;
+
+    filesystem.reserve(inputLines.size());
 
     int64_t curr_id = 0;
     for (const auto str_chunk : inputLines[0] | std::ranges::views::chunk(2))
@@ -68,7 +68,7 @@ handlePart2(const std::vector<std::string> &inputLines)
             continue;
         }
 
-        auto size_diff = free_item.size - end_item.size;
+        uint8_t size_diff = free_item.size - end_item.size;
         // If they are the same size, we can simply swap them.
         if (size_diff == 0)
         {
