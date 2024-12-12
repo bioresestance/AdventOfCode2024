@@ -19,7 +19,15 @@ struct Coordinate
 {
     int64_t x, y;
 
-    Coordinate operator+(const Coordinate &other)
+    Coordinate operator+(const Coordinate &other) const
+    {
+        Coordinate res;
+        res.x = x + other.x;
+        res.y = y + other.y;
+        return res;
+    }
+
+    Coordinate operator+(Coordinate &other) const
     {
         Coordinate res;
         res.x = x + other.x;
@@ -31,6 +39,16 @@ struct Coordinate
     {
         return x == other.x && y == other.y;
     }
+
+    bool operator==(Coordinate &other) const
+    {
+        return x == other.x && y == other.y;
+    }
+
+    static const Coordinate NORTH;
+    static const Coordinate SOUTH;
+    static const Coordinate EAST;
+    static const Coordinate WEST;
 };
 
 namespace std
@@ -43,4 +61,10 @@ namespace std
             return std::hash<int64_t>()(coord.x) ^ (std::hash<int64_t>()(coord.y) << 1);
         }
     };
+}
+
+template <typename T>
+static bool inBoundary(std::vector<std::vector<T>> &map, Coordinate coord)
+{
+    return coord.x >= 0 && coord.x < map[0].size() && coord.y >= 0 && coord.y < map.size();
 }
