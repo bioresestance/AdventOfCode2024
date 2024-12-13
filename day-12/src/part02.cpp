@@ -52,34 +52,37 @@ uint64_t countCorners(const std::vector<Coordinate> &group)
             }
         }
 
-        // Now we need to check what nodes are at each of the 4 corners. Each corner can have up to 3 neighbors.
-
-        // Top left Corner (check North, North-West, West neighbors)
+        if (not neighbors.contains(Coordinate::WEST) and not neighbors.contains(Coordinate::NORTH))
         {
-            // Only one in north west, means we have 2 corners.
-            if (neighbors.contains(Coordinate::NORTH_WEST) and not(neighbors.contains(Coordinate::NORTH) or neighbors.contains(Coordinate::WEST)))
-            {
-                corners += 2;
-            }
-            // No neighbors, so only 1 corner
-            else if (not(neighbors.contains(Coordinate::NORTH_WEST) and neighbors.contains(Coordinate::NORTH) and neighbors.contains(Coordinate::WEST)))
-            {
-                corners += 1;
-            }
+            corners += 1;
         }
-
-        // Top Right Corner (check North, North-East, East neighbors)
+        if (not neighbors.contains(Coordinate::WEST) and not neighbors.contains(Coordinate::SOUTH))
         {
-            // Only one in north west, means we have 2 corners.
-            if (neighbors.contains(Coordinate::NORTH_EAST) and not(neighbors.contains(Coordinate::NORTH) or neighbors.contains(Coordinate::EAST)))
-            {
-                corners += 2;
-            }
-            // No neighbors, so only 1 corner
-            else if (not(neighbors.contains(Coordinate::NORTH_EAST) and neighbors.contains(Coordinate::NORTH) and neighbors.contains(Coordinate::EAST)))
-            {
-                corners += 1;
-            }
+            corners += 1;
+        }
+        if (not neighbors.contains(Coordinate::EAST) and not neighbors.contains(Coordinate::NORTH))
+        {
+            corners += 1;
+        }
+        if (not neighbors.contains(Coordinate::EAST) and not neighbors.contains(Coordinate::SOUTH))
+        {
+            corners += 1;
+        }
+        if (neighbors.contains(Coordinate::WEST) and neighbors.contains(Coordinate::NORTH) and not neighbors.contains(Coordinate::NORTH_WEST))
+        {
+            corners += 1;
+        }
+        if (neighbors.contains(Coordinate::EAST) and neighbors.contains(Coordinate::NORTH) and not neighbors.contains(Coordinate::NORTH_EAST))
+        {
+            corners += 1;
+        }
+        if (neighbors.contains(Coordinate::WEST) and neighbors.contains(Coordinate::SOUTH) and not neighbors.contains(Coordinate::SOUTH_WEST))
+        {
+            corners += 1;
+        }
+        if (neighbors.contains(Coordinate::EAST) and neighbors.contains(Coordinate::SOUTH) and not neighbors.contains(Coordinate::SOUTH_EAST))
+        {
+            corners += 1;
         }
 
         total_corners += corners;
