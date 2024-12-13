@@ -49,6 +49,10 @@ struct Coordinate
     static const Coordinate SOUTH;
     static const Coordinate EAST;
     static const Coordinate WEST;
+    static const Coordinate NORTH_EAST;
+    static const Coordinate NORTH_WEST;
+    static const Coordinate SOUTH_EAST;
+    static const Coordinate SOUTH_WEST;
 };
 
 namespace std
