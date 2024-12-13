@@ -7,19 +7,29 @@
 #include "InputFile.hpp"
 #include "src/include.hpp"
 
-
 #define ENABLE_PART1 (true)
 #define ENABLE_PART2 (false)
 
-
-
 // Add the test input and output strings here to validate the solution
-const std::vector<std::string> testInputStrings = {""};
+const std::vector<std::string> testInputStrings = {"Button A: X+94, Y+34",
+                                                   "Button B: X+22, Y+67",
+                                                   "Prize: X=8400, Y=5400",
+                                                   "",
+                                                   "Button A: X+26, Y+66",
+                                                   "Button B: X+67, Y+21",
+                                                   "Prize: X=12748, Y=12176",
+                                                   "",
+                                                   "Button A: X+17, Y+86",
+                                                   "Button B: X+84, Y+37",
+                                                   "Prize: X=7870, Y=6450",
+                                                   "",
+                                                   "Button A: X+69, Y+23",
+                                                   "Button B: X+27, Y+71",
+                                                   "Prize: X=18641, Y=10279"};
 
-const int64_t part1Expected = -1;
+const int64_t part1Expected = 480;
 const int64_t part2Expected = -1;
 
-    
 static std::string getInputFilePath()
 {
     using std::filesystem::path;
@@ -35,7 +45,7 @@ static std::string getInputFilePath()
 }
 
 #if ENABLE_PART1
-TEST(Day{{day}}Tests, TestPart1)
+TEST(Day13Tests, TestPart1)
 {
     auto result = handlePart1(testInputStrings);
     std::cout << "Part 1 - Test Result: " << result << std::endl;
@@ -44,7 +54,7 @@ TEST(Day{{day}}Tests, TestPart1)
 #endif
 
 #if ENABLE_PART2
-TEST(Day{{day}}Tests, TestPart2)
+TEST(Day13Tests, TestPart2)
 {
     auto result = handlePart2(testInputStrings);
     std::cout << "Part 2 - Test Result: " << result << std::endl;
@@ -52,39 +62,37 @@ TEST(Day{{day}}Tests, TestPart2)
 }
 #endif
 
-
-
-
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
 
     // Run the tests
     ::testing::InitGoogleTest(&argc, argv);
     int result = RUN_ALL_TESTS();
 
     // If the tests pass, run the solution
-    if (result == 0) 
+    if (result == 0)
     {
         InputFile inputFile = InputFile(getInputFilePath());
         std::cout << "--------------------------------------------------------------------------------------------------------" << std::endl;
-        #if ENABLE_PART1
-        std::cout << "Day {{day}}, running solution:" << std::endl;
+#if ENABLE_PART1
+        std::cout << "Day 13, running solution:" << std::endl;
         auto startPart1 = std::chrono::high_resolution_clock::now();
         auto part1Result = handlePart1(inputFile.getLines());
         auto endPart1 = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> durationPart1 = endPart1 - startPart1;
         std::cout << "Part 1 - Real Result: " << part1Result << std::endl;
         std::cout << "Part 1 - Time taken: " << durationPart1.count() << " seconds" << std::endl;
-        #endif
+#endif
 
-        #if ENABLE_PART2
+#if ENABLE_PART2
         auto startPart2 = std::chrono::high_resolution_clock::now();
         auto part2Result = handlePart2(inputFile.getLines());
         auto endPart2 = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> durationPart2 = endPart2 - startPart2;
         std::cout << "Part 2 - Real Result: " << part2Result << std::endl;
         std::cout << "Part 2 - Time taken: " << durationPart2.count() << " seconds" << std::endl;
-        #endif
+#endif
         std::cout << "--------------------------------------------------------------------------------------------------------" << std::endl;
-    } 
+    }
     return result;
 }
