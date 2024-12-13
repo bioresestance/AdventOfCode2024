@@ -52,6 +52,7 @@ int64_t handlePart1(const std::vector<std::string> &inputLines)
     uint64_t total = 0;
     for (const auto &[x1, x3, x2, x4, y1, y2] : parsedValues)
     {
+        // Sove a system of equation with only two unknown values and 2 equations.
         auto A = std::round((y2 - ((x4 * y1) / x2)) / (x3 - ((x1 * x4) / x2)));
         auto B = std::round((y1 / x2) - ((x1 / x2) * A));
         

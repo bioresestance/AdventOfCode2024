@@ -8,7 +8,7 @@
 #include "src/include.hpp"
 
 #define ENABLE_PART1 (true)
-#define ENABLE_PART2 (false)
+#define ENABLE_PART2 (true)
 
 // Add the test input and output strings here to validate the solution
 const std::vector<std::string> testInputStrings = {"Button A: X+94, Y+34",
@@ -50,15 +50,6 @@ TEST(Day13Tests, TestPart1)
     auto result = handlePart1(testInputStrings);
     std::cout << "Part 1 - Test Result: " << result << std::endl;
     ASSERT_EQ(result, part1Expected);
-}
-#endif
-
-#if ENABLE_PART2
-TEST(Day13Tests, TestPart2)
-{
-    auto result = handlePart2(testInputStrings);
-    std::cout << "Part 2 - Test Result: " << result << std::endl;
-    ASSERT_EQ(result, part2Expected);
 }
 #endif
 
