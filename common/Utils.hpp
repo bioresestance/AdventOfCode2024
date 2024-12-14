@@ -45,6 +45,45 @@ struct Coordinate
         return x == other.x && y == other.y;
     }
 
+    bool operator<(const Coordinate &other) const
+    {
+        return x < other.x && y < other.y;
+    }
+
+    bool operator>(const Coordinate &other) const
+    {
+        return x > other.x && y > other.y;
+    }
+    bool operator<(Coordinate &other) const
+    {
+        return x < other.x && y < other.y;
+    }
+
+    bool operator>(Coordinate &other) const
+    {
+        return x > other.x && y > other.y;
+    }
+
+    bool operator<=(const Coordinate &other) const
+    {
+        return x <= other.x && y <= other.y;
+    }
+
+    bool operator>=(const Coordinate &other) const
+    {
+        return x >= other.x && y >= other.y;
+    }
+
+    bool operator<=(Coordinate &other) const
+    {
+        return x <= other.x && y <= other.y;
+    }
+
+    bool operator>=(Coordinate &other) const
+    {
+        return x >= other.x && y >= other.y;
+    }
+
     static const Coordinate NORTH;
     static const Coordinate SOUTH;
     static const Coordinate EAST;
