@@ -57,7 +57,8 @@ static void moveBlock(Coordinate cur_pos, Coordinate move_dir, std::unordered_ma
         break;
     }
 }
-void printMap(const std::unordered_map<Coordinate, BlockType> &blocks)
+
+static void printMap(const std::unordered_map<Coordinate, BlockType> &blocks)
 {
     int min_x = std::numeric_limits<int>::max();
     int max_x = std::numeric_limits<int>::min();

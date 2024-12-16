@@ -34,6 +34,21 @@ struct Coordinate
         res.y = y + other.y;
         return res;
     }
+    Coordinate operator-(const Coordinate &other) const
+    {
+        Coordinate res;
+        res.x = x - other.x;
+        res.y = y - other.y;
+        return res;
+    }
+
+    Coordinate operator-(Coordinate &other) const
+    {
+        Coordinate res;
+        res.x = x - other.x;
+        res.y = y - other.y;
+        return res;
+    }
 
     bool operator==(const Coordinate &other) const
     {
