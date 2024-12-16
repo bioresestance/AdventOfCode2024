@@ -1,9 +1,6 @@
 #pragma once
 
-#include <string>
-#include <string_view>
-#include <vector>
-#include <ranges>
+#include <bits/stdc++.h>
 
 inline std::vector<std::string> splitString(const std::string_view input, const char delimiter)
 {
@@ -51,11 +48,6 @@ struct Coordinate
     }
 
     bool operator==(const Coordinate &other) const
-    {
-        return x == other.x && y == other.y;
-    }
-
-    bool operator==(Coordinate &other) const
     {
         return x == other.x && y == other.y;
     }

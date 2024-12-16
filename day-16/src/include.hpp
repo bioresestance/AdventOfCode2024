@@ -1,6 +1,6 @@
 /**
-* Day-{{day}} Include Header
-*/
+ * Day-16 Include Header
+ */
 #pragma once
 
 #include <bits/stdc++.h>
