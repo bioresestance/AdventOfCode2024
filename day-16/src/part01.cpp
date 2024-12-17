@@ -59,7 +59,7 @@ int64_t handlePart1(const std::vector<std::string> &inputLines)
     pq.push({start_loc, Direction::EAST, 0});
     cost_so_far[start_loc] = 0;
 
-    std::array<std::pair<Direction, Coordinate>, 4> directions = {
+    const std::array<std::pair<Direction, Coordinate>, 4> directions = {
         std::make_pair(Direction::NORTH, Coordinate::NORTH),
         std::make_pair(Direction::SOUTH, Coordinate::SOUTH),
         std::make_pair(Direction::EAST, Coordinate::EAST),
