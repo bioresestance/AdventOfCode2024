@@ -81,55 +81,45 @@ using opFunction = void (*)(ProgramState &, uint8_t);
 
 static constexpr inline uint64_t toComboOperand(ProgramState &state, const uint8_t operand)
 {
-
-    if (operand <= 3)
+    switch (operand)
     {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
         return operand;
-    }
-
-    else if (operand == 4)
-    {
+    case 4:
         return state.reg_a;
-    }
-
-    else if (operand == 5)
-    {
+    case 5:
         return state.reg_b;
-    }
-
-    else if (operand == 6)
-    {
+    case 6:
         return state.reg_c;
+    default:
+        throw std::invalid_argument("Invalid Combo Operand");
     }
-    else
-    {
-        std::cout << "Invalid Combo Operand!!!!" << std::endl;
-        exit(1);
-    }
-    return -1;
 }
 
-static constexpr void advOperation(ProgramState &state, const uint8_t operand)
+static constexpr inline void advOperation(ProgramState &state, const uint8_t operand)
 {
     auto combo_op = toComboOperand(state, operand);
-    state.reg_a = state.reg_a / std::pow(2, combo_op);
+    state.reg_a = state.reg_a >> combo_op;
     state.pc += 2;
 }
 
-static constexpr void bxlOperation(ProgramState &state, const uint8_t operand)
+static constexpr inline void bxlOperation(ProgramState &state, const uint8_t operand)
 {
     state.reg_b = state.reg_b xor (uint64_t) operand;
     state.pc += 2;
 }
 
-static constexpr void bstOperation(ProgramState &state, const uint8_t operand)
+static constexpr inline void bstOperation(ProgramState &state, const uint8_t operand)
 {
     auto combo_op = toComboOperand(state, operand);
     state.reg_b = combo_op % 8;
     state.pc += 2;
 }
 
-static constexpr void jnzOperation(ProgramState &state, const uint8_t operand)
+static constexpr inline void jnzOperation(ProgramState &state, const uint8_t operand)
 {
     if (state.reg_a == 0)
     {
@@ -141,30 +131,30 @@ static constexpr void jnzOperation(ProgramState &state, const uint8_t operand)
     }
 }
 
-static constexpr void bxcOperation(ProgramState &state, const uint8_t operand)
+static constexpr inline void bxcOperation(ProgramState &state, const uint8_t operand)
 {
     state.reg_b = state.reg_b xor state.reg_c;
     state.pc += 2;
 }
 
-static constexpr void outOperation(ProgramState &state, const uint8_t operand)
+static constexpr inline void outOperation(ProgramState &state, const uint8_t operand)
 {
     auto combo_op = toComboOperand(state, operand) % 8;
     out_stream.emplace_back(combo_op);
     state.pc += 2;
 }
 
-static constexpr void bdvOperation(ProgramState &state, const uint8_t operand)
+static constexpr inline void bdvOperation(ProgramState &state, const uint8_t operand)
 {
     auto combo_op = toComboOperand(state, operand);
-    state.reg_b = state.reg_a / std::pow(2, combo_op);
+    state.reg_b = state.reg_a >> combo_op;
     state.pc += 2;
 }
 
-static constexpr void cdvOperation(ProgramState &state, const uint8_t operand)
+static constexpr inline void cdvOperation(ProgramState &state, const uint8_t operand)
 {
     auto combo_op = toComboOperand(state, operand);
-    state.reg_c = state.reg_a / std::pow(2, combo_op);
+    state.reg_c = state.reg_a >> combo_op;
     state.pc += 2;
 }
 

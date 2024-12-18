@@ -26,7 +26,13 @@ const std::vector<std::string> testInputStrings2 = {"Register A: 41644071",
                                                     "Program: 2,4,1,2,7,5,1,7,4,4,0,3,5,5,3,0"};
 
 const std::string part1Expected2 = "3,1,5,3,7,4,2,7,5";
-const std::string part2Expected = "-1";
+
+const std::vector<std::string> testInputStrings_part2 = {"Register A: 2024",
+                                                         "Register B: 0",
+                                                         "Register C: 0",
+                                                         "",
+                                                         "Program: 0,3,5,4,3,0"};
+const int64_t part2Expected = 117440;
 
 static std::string getInputFilePath()
 {
@@ -61,7 +67,7 @@ TEST(Day17Tests, TestPart1_2)
 #if ENABLE_PART2
 TEST(Day17Tests, TestPart2)
 {
-    auto result = handlePart2(testInputStrings);
+    auto result = handlePart2(testInputStrings_part2);
     std::cout << "Part 2 - Test Result: " << result << std::endl;
     ASSERT_EQ(result, part2Expected);
 }

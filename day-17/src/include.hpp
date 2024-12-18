@@ -7,4 +7,4 @@
 #include "Utils.hpp"
 
 std::string handlePart1(const std::vector<std::string> &inputLines);
-std::string handlePart2(const std::vector<std::string> &inputLines);
+int64_t handlePart2(const std::vector<std::string> &inputLines);
