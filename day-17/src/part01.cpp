@@ -115,7 +115,7 @@ static constexpr inline void bxlOperation(ProgramState &state, const uint8_t ope
 static constexpr inline void bstOperation(ProgramState &state, const uint8_t operand)
 {
     auto combo_op = toComboOperand(state, operand);
-    state.reg_b = combo_op % 8;
+    state.reg_b = combo_op & 0b00000111;
     state.pc += 2;
 }
 
@@ -139,7 +139,7 @@ static constexpr inline void bxcOperation(ProgramState &state, const uint8_t ope
 
 static constexpr inline void outOperation(ProgramState &state, const uint8_t operand)
 {
-    auto combo_op = toComboOperand(state, operand) % 8;
+    auto combo_op = toComboOperand(state, operand) & 0b00000111;
     out_stream.emplace_back(combo_op);
     state.pc += 2;
 }
@@ -176,12 +176,7 @@ std::string handlePart1(const std::vector<std::string> &inputLines)
 
     while (program.pc < program.instructions.size())
     {
-        OpCode op = static_cast<OpCode>(program.instructions[program.pc]);
-        uint8_t operand = program.instructions[program.pc + 1];
-
-        // std::cout << "Op code: " << std::to_string(static_cast<uint8_t>(op)) << std::endl;
-        operations[static_cast<uint8_t>(op)](program, operand);
-        // std::cout << program << std::endl;
+        operations[program.instructions[program.pc]](program, program.instructions[program.pc + 1]);
     }
 
     std::string result;
