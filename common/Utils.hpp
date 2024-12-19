@@ -91,6 +91,12 @@ struct Coordinate
         return x >= other.x && y >= other.y;
     }
 
+    friend std::ostream &operator<<(std::ostream &os, const Coordinate &coord)
+    {
+        os << "(" << coord.x << ", " << coord.y << ")";
+        return os;
+    }
+
     static const Coordinate NORTH;
     static const Coordinate SOUTH;
     static const Coordinate EAST;
@@ -117,4 +123,10 @@ template <typename T>
 static bool inBoundary(std::vector<std::vector<T>> &map, Coordinate coord)
 {
     return coord.x >= 0 && coord.x < map[0].size() && coord.y >= 0 && coord.y < map.size();
+}
+
+static constexpr inline bool inBoundary(Coordinate node, uint32_t map_width, uint32_t map_height)
+{
+    return node.x >= 0 && node.x < map_width &&
+           node.y >= 0 && node.y < map_height;
 }
